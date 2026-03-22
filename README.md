@@ -13,7 +13,10 @@ Abgabe: Wissenschaftliches Poster (A0, PDF, 1 Seite)
 Daten: STT4SG-350 Korpus
 
 Whisper auf Audioclips laufen lassen und Output mit Ground Truth vergleichen:  
-Audio: [Jemand sagt "Guete Morge, wie gaats?"]  
-Ground Truth: "Guten Morgen, wie geht es?"  
-Whisper Output: "Guten Morgen, wie geht's dir?"  
+
+```
+Audio: [Jemand sagt "Guete Morge, wie gaats?"]      
+Ground Truth: "Guten Morgen, wie geht es?"    
+Whisper Output: "Guten Morgen, wie geht's dir?"     
+```
 → WER = Anteil falsch erkannter Wörter  
