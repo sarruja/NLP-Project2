@@ -20,3 +20,22 @@ Ground Truth: "Guten Morgen, wie geht es?"
 Whisper Output: "Guten Morgen, wie geht's dir?"     
 ```
 → WER = Anteil falsch erkannter Wörter  
+
+
+## Project Structure
+
+```
+Project_2/
+│
+├── data/                        ← alle Datenfiles (lokal, nicht in Git)
+│   ├── clips__test/             ← Audio Daten test
+│   ├── clips__train_valid/      ← Audio Daten train
+│   ├── test.csv
+│   ├── train_all.tsv
+│   ├── train_balanced.tsv
+│   └── valid.tsv
+│ 
+├── .gitignore
+└── README.md
+```
+
