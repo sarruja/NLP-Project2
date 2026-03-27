@@ -8,7 +8,7 @@ Abgabe: Wissenschaftliches Poster (A0, PDF, 1 Seite)
 
 ## Forschungsfrage  
 - Whisper WER (Word Error Rate) pro Dialektregion
-- VertiefungRQ1: Alter & Geschlecht als Einflussfaktoren
+- Vertiefung: Alter & Geschlecht als Einflussfaktoren
 
 Wie gut erkennt Whisper gesprochenes Schweizerdeutsch in den sieben Dialektregionen des STT4SG-350-Korpus, gemessen anhand der Word Error Rate (WER)? Als Vertiefung untersuchen wir, ob Alter und Geschlecht der Sprechenden die WER systematisch beeinflussen.
 
