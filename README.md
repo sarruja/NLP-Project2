@@ -7,8 +7,32 @@ Postersession: 17.04.2026
 Abgabe: Wissenschaftliches Poster (A0, PDF, 1 Seite)  
 
 ## Forschungsfrage  
-- Whisper WER (Word Error Rate) pro Dialektregion
-- VertiefungRQ1: Alter & Geschlecht als Einflussfaktoren
+Wie verändert sich die ASR-Qualität von Whisper v1→v2→v3 auf Schweizerdeutsch, und welche Fehlertypen dominieren?
+- Fehleranaylse mit verschiedene Whisper Modellen (und WER vs CHR wenn zeit)
+
+Fehlertypen die man kategorisieren könnte (nur eine Idee):  
+- Zahlen: "zwanzig" vs. "20"
+- Dialekt-spezifische Wörter die falsch transkribiert werden
+- Eigennamen / Ortsnamen (z.B. "Zürich" → "Zurich")
+- Auslassungen (Wort komplett fehlt)
+- Substitutionen (falsches Wort)
+- Code-switching Fehler (Dialekt → Hochdeutsch)  
+
+Mögliche andere Modelle zum Vergleich:
+- Originale Whisper-Modelle (OpenAI)
+  - openai/whisper-large-v1, v2, v3 — das sind eure Hauptkandidaten
+- Whisper-Varianten von anderen Anbietern
+  - Distil-Whisper (HuggingFace, 2023): komprimierte Version via Knowledge Distillation — 51% weniger Parameter, 5.8x schneller, aber nur ~1% schlechter WER Towards AI  
+  - Faster-Whisper (SYSTRAN): technisch dasselbe Modell, aber optimierte Inferenz — kein anderes Training  
+  - WhisperX (Uni Oxford): erweitert Whisper um word-level Timestamps und Speaker Diarization Towards AI
+
+- Andere ASR-Modelle (nicht Whisper-basiert) zum Vergleich  
+  - facebook/wav2vec2 (fine-tuned auf Deutsch)  
+  - das von fhnw
+  
+Das STT4SG-eigene Baseline-Modell aus dem Paper — das wäre eigentlich der natürlichste Vergleichspunkt!
+
+
 
 Daten: STT4SG-350 Korpus
 
