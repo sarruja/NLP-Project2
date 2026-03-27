@@ -7,6 +7,9 @@ Postersession: 17.04.2026
 Abgabe: Wissenschaftliches Poster (A0, PDF, 1 Seite)  
 
 ## Forschungsfrage  
+- Fehleranaylse mit verschiedene Whisper Modellen (und WER vs CHR wenn zeit)
+
+  
 - Whisper WER (Word Error Rate) pro Dialektregion
 - Vertiefung: Alter & Geschlecht als Einflussfaktoren
 
