@@ -80,9 +80,30 @@ Project_2/
  
 ---
 
-## Setup – Lokal (für Test-Run)
+## Setup 
+  
+### HuggingFace Account
  
-### 1. Repository klonen
+Um die Whisper-Modelle von HuggingFace herunterzuladen, wird ein persönlicher Access Token benötigt.
+ 
+#### Account erstellen
+1. Geh auf [huggingface.co](https://huggingface.co) → Sign Up
+2. Mit Email registrieren (ich habe die ZHAW-Mail verwenden), als Username habe ich das ZHAW-Kürzel verwendet (aber ist egal)
+3. Email Adresse bestätigen (Mailbox überprüfen)
+ 
+#### Token erstellen
+1. [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) → `New token`
+2. Token type: **Read**
+3. Name z.B. `nlp_project2` → `Create token`
+4. Token kopieren und sicher aufbewahren (wird nur einmal angezeigt!)
+
+> ⚠️ Token nicht ins Git einchecken und nicht teilen — jede Person erstellt ihren eigenen!
+
+---
+
+### Lokal (für Test-Run)
+ 
+#### 1. Repository klonen
 ```bash
 git clone <repo-url>
 cd Project_2
@@ -98,9 +119,21 @@ Nötge Package isntallierne (im Jupyter Notbook hats bereits eine Zelle - gegebf
 `conda install -c conda-forge ffmpeg -y `, muss im PowerShell oder Anaconda Prompt ausgeführt werden  
 Ams Schluss noch Kernel neustarten
 
+### 4. HuggingFace Token in Colab hinterlegen
+1. Links in Colab auf das 🔑 **Secrets** Icon klicken
+2. `Add new secret` → Name: `HF_TOKEN` → Value: Token einfügen
+3. **Notebook-Zugriff Toggle: AN**
+ 
+Die folgenden Zeilen sind bereits im Notebook Setup-Block vorhanden und lesen den Token automatisch:
+```python
+from google.colab import userdata
+import os
+os.environ['HF_TOKEN'] = userdata.get('HF_TOKEN')
+```
+
 ---
  
-## Setup – Google Colab (für Full-Run)
+### Google Colab (für Full-Run)
  
 Der Full-Run (~24k Samples × 3 Modelle) braucht eine GPU und läuft auf Google Colab.
  
