@@ -117,6 +117,7 @@ MyDrive/
  
 ### 2. Notebook auf Colab öffnen
 - **Option A:** `File → Open notebook → GitHub → Repo URL` eingeben
+  - Notebook auf Colab öffnen: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/<dein-github-username>/<dein-repo-name>/blob/main/whisper_pipeline.ipynb)
 - **Option B:** Notebook in `NLP_Project2/` auf Drive hochladen → Doppelklick → öffnet in Colab
  
 ### 3. GPU aktivieren
