@@ -9,20 +9,27 @@ Abgabe: Wissenschaftliches Poster (A0, PDF, 1 Seite)
 ---
 
 ## Forschungsfrage  
-Wie verändert sich die ASR-Qualität von Whisper v1→v2→v3 auf Schweizerdeutsch, und welche Fehlertypen dominieren?
-- Fehleranaylse mit verschiedene Whisper Modellen (und WER vs CHR wenn zeit)
+> ***Wie verändert sich die ASR-Qualität von Whisper v1→v2→v3 auf Schweizerdeutsch, und welche Fehlertypen dominieren?***  
+- Fehleranaylse mit verschiedene Whisper Modellen (v1, v2, v3 und WER vs CHR wenn zeit)
 
-Fehlertypen die man kategorisieren könnte (nur eine Idee):  
-- Zahlen: "zwanzig" vs. "20"
+ 
+### Mögliche Fehlertypen (für Analyse)
+ 
+- Substitutionen: falsches Wort (`"ihr"` → `"er"`)
+- Deletions: Wort fehlt komplett
+- Insertions: extra Wort eingefügt
+- Zahlen: `"zwanzig"` → `"20"`
 - Dialekt-spezifische Wörter die falsch transkribiert werden
-- Eigennamen / Ortsnamen (z.B. "Zürich" → "Zurich")
-- Auslassungen (Wort komplett fehlt)
-- Substitutionen (falsches Wort)
-- Code-switching Fehler (Dialekt → Hochdeutsch)  
+- - Eigennamen / Ortsnamen (z.B. "Zürich" → "Zurich")
+- Seltene Wörter zerstückelt: `"Postulat"` → `"Post und Art"`
+- Phonetische Verwechslungen: `"Syrer"` → `"Säurer"`
+- Code-switching: Dialekt → Hochdeutsch
 
-Mögliche andere Modelle zum Vergleich:
+
+### Mögliche andere Modelle zum Vergleich:
 - Originale Whisper-Modelle (OpenAI)
-  - openai/whisper-large-v1, v2, v3 — das sind eure Hauptkandidaten
+  - openai/whisper-large-v1, v2, v3 — das verwenden wir sicher
+
 - Whisper-Varianten von anderen Anbietern
   - Distil-Whisper (HuggingFace, 2023): komprimierte Version via Knowledge Distillation — 51% weniger Parameter, 5.8x schneller, aber nur ~1% schlechter WER Towards AI  
   - Faster-Whisper (SYSTRAN): technisch dasselbe Modell, aber optimierte Inferenz — kein anderes Training  
@@ -32,12 +39,12 @@ Mögliche andere Modelle zum Vergleich:
   - facebook/wav2vec2 (fine-tuned auf Deutsch)  
   - das von fhnw
   
-Das STT4SG-eigene Baseline-Modell aus dem Paper — das wäre eigentlich der natürlichste Vergleichspunkt!
+Das STT4SG-eigene Baseline-Modell aus dem Paper — das wäre eigentlich ein guter Vergleichspunkt.
 
 Daten: STT4SG-350 Korpus
 
-Whisper auf Audioclips laufen lassen und Output mit Ground Truth vergleichen:  
-
+_Wie funktioneirt Whisper (kurz und bündig)_
+Whisper auf Audioclips laufen lassen und Output mit Ground Truth vergleichen:   
 ```
 Audio: [Jemand sagt "Guete Morge, wie gaats?"]      
 Ground Truth: "Guten Morgen, wie geht es?"    
@@ -172,14 +179,5 @@ Alle Zellen von oben nach unten ausführen. Checkpoints werden alle 200 Samples 
  
 > ⚠️ Colab trennt die Session nach ~90 Min Inaktivität — dank Checkpoints kein Datenverlust!
  
----
+
  
-## Mögliche Fehlertypen (für Analyse)
- 
-- Substitutionen: falsches Wort (`"ihr"` → `"er"`)
-- Deletions: Wort fehlt komplett
-- Insertions: extra Wort eingefügt
-- Zahlen: `"zwanzig"` → `"20"`
-- Seltene Wörter zerstückelt: `"Postulat"` → `"Post und Art"`
-- Phonetische Verwechslungen: `"Syrer"` → `"Säurer"`
-- Code-switching: Dialekt → Hochdeutsch
