@@ -179,5 +179,39 @@ Alle Zellen von oben nach unten ausführen. Checkpoints werden alle 200 Samples 
  
 > ⚠️ Colab trennt die Session nach ~90 Min Inaktivität — dank Checkpoints kein Datenverlust!
  
+---
 
+### Kaggle (für Full-Run, empfohlen)
+
+Kaggle bietet 30h GPU pro Woche (T4 x2) ohne Inaktivitäts-Timeout — ideal für lange Runs.
+
+### 1. Notebook importieren
+`File → Import Notebook → kaggle_nlp-project2.ipynb` (aus GitHub)
+
+### 2. GPU aktivieren
+Rechts im Notebook: `Session options → Accelerator → GPU T4 x2 → Save`
+
+### 3. Dataset hochladen (einmalig)
+1. `data/` Ordner (mit `test.tsv` und `clips__test/`) als ZIP komprimieren
+2. Kaggle → `Create → Dataset` → ZIP hochladen → Title: `data_nlp_project2` → Visibility: **Private** → `Create`
+
+### 4. Dataset im Notebook einbinden
+Rechts im Notebook: `Input → Add Input → Your Datasets → data_nlp_project2`
+
+### 5. Pfade anpassen
+Im Setup-Block (Cell 4) die Pfade auf Kaggle umstellen:
+```python
+DATA_DIR    = '/kaggle/input/datasets/username/data-nlp-project2/data_kaggle_p2/'
+AUDIO_DIR   = '/kaggle/input/datasets/username/data-nlp-project2/data_kaggle_p2/clips__test/'
+RESULTS_DIR = '/kaggle/working/'
+TEST_FILE   = '/kaggle/input/datasets/username/data-nlp-project2/data_kaggle_p2/test.tsv'
+```
+
+### 6. Full-Run starten
+Alle Zellen von oben nach unten ausführen. Checkpoints werden alle 200 Samples in `/kaggle/working/` gespeichert.
+
+### 7. Ergebnisse sichern
+Nach dem Run die Checkpoint-CSVs unter `Output` (rechts im Notebook) herunterladen und lokal speichern.
+
+> ⚠️ Kaggle lässt Notebooks bis zu 9h laufen — kein Inaktivitäts-Disconnect wie bei Colab Free!
  
