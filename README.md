@@ -215,3 +215,7 @@ Nach dem Run die Checkpoint-CSVs unter `Output` (rechts im Notebook) herunterlad
 
 > ⚠️ Kaggle lässt Notebooks bis zu 9h laufen — kein Inaktivitäts-Disconnect wie bei Colab Free!
  
+### 8. Ergebnisse sichern
+Nach dem Run die Checkpoint-CSVs unter `Output` (rechts im Notebook) herunterladen und lokal speichern.
+
+> ⚠️ Bei einem neuen Run muss die Checkpoint-CSV wieder hochgeladen und der Pfad im Code angepasst werden — dieser Teil ist noch nicht im File (noch offen/TODO).
