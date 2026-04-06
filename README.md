@@ -218,4 +218,55 @@ Nach dem Run die Checkpoint-CSVs unter `Output` (rechts im Notebook) herunterlad
 ### 8. Ergebnisse sichern
 Nach dem Run die Checkpoint-CSVs unter `Output` (rechts im Notebook) herunterladen und lokal speichern.
 
-> ⚠️ Bei einem neuen Run muss die Checkpoint-CSV wieder hochgeladen und der Pfad im Code angepasst werden — dieser Teil ist noch nicht im File (noch offen/TODO).
+> ⚠️ Bei einem neuen Run muss die Checkpoint-CSV wieder hochgeladen und der Pfad im Code angepasst werden — dieser Teil ist noch nicht im File.
+
+
+
+## Fehleranalyse (`fehleranalyse.ipynb`)
+
+### Was wurde gemacht?
+
+Die Fehleranalyse vergleicht die drei Whisper-Modelle (large-v1, v2, v3) auf dem STT4SG-350 Test-Set (24'605 Samples, 16 Schweizer Kantone) anhand folgender Metriken und Analysen:
+
+- **WER** (Word Error Rate) — overall und pro Kanton, mit und ohne Satzzeichen
+- **CER** (Character Error Rate) — overall und pro Kanton, mit und ohne Satzzeichen
+- **Fehlertypen** — Anteil Substitutionen, Deletions und Insertions an den Gesamtfehlern
+- **Top Substitutionen** — häufigste falsch erkannte Wörter pro Modell
+- **Satzzeichen-Analyse** — welche Satzzeichen zu Fehlern führen
+- **Linguistische Kategorien** — Einteilung der Substitutionen in Zahlen, Eigennamen, zerstückelte Wörter und Sonstige
+
+Alle Funktionen sind in `helper_functions.py` ausgelagert.
+
+---
+
+### Was lässt sich aus den Resultaten interpretieren?
+
+**WER verbessert sich v1 → v3, der Sprung v1→v2 ist grösser als v2→v3:**
+- v1: 29.36% → v2: 25.64% → v3: 24.98%
+- v3 ist kaum besser als v2 auf Schweizerdeutsch
+
+**CER ist deutlich tiefer als WER (~12-14% vs ~25-29%):**
+- Whisper ist auf Zeichenebene näher an der Ground Truth als auf Wortebene
+- Viele Fehler sind kleine Variationen (z.B. `"diese"` → `"die"`) die bei WER voll zählen, bei CER nur 2 Zeichen ausmachen
+
+**Satzzeichen machen ~1.8 PP WER aus, aber kaum CER:**
+- WER ohne Satzzeichen: v1 27.56%, v2 23.82%, v3 23.18%
+- Hauptverursacher sind Wörter mit angehängtem `.` am Satzende
+
+**Fehlertypen sind stabil über alle 3 Modelle (~74% Sub, ~12% Del, ~13% Ins):**
+- Die Modellverbesserungen reduzieren die Anzahl Fehler, ändern aber nicht deren Art
+- Substitutionen dominieren klar → Whisper erkennt meist die richtige Anzahl Wörter, sagt aber oft das falsche
+
+**Dialektregion hat grossen Einfluss:**
+- Bester Kanton: SH (Schaffhausen) ~16-19% WER — Dialekt am nächsten am Hochdeutschen
+- Schlechtester Kanton: VS (Wallis) ~33-38% WER — stark abweichender Dialekt
+- Reihenfolge der Kantone bleibt über alle 3 Modelle gleich → Schwierigkeit hängt am Dialekt, nicht am Modell
+
+**Dominanter Fehlertyp: Code-switching (Dialekt → Standarddeutsch):**
+- Demonstrativpronomen: `"diese"` → `"die"`, `"dieses"` → `"das"`
+- Synonyme: `"nun"` → `"jetzt"`, `"deshalb"` → `"darum"`, `"doch"` → `"aber"`
+- Tempus: `"wurde"` → `"ist"`, `"hatte"` → `"hat"` (Vergangenheit → Gegenwart)
+
+**Zahlen-Normalisierung:** Whisper schreibt Zahlen als Ziffern (`"zehn"` → `"10"`, `"tausend"` → `"1000"`) — wird vom WER als Fehler gezählt, ist aber inhaltlich korrekt.
+
+> ⚠️ **Limitation:** WER behandelt semantisch äquivalente Ausdrücke (z.B. `"deshalb"`/`"darum"`) und dialektbedingte Varianten (z.B. `"diese"`/`"die"`) als Fehler, obwohl die Transkription inhaltlich korrekt sein kann. Die tatsächliche Fehlerrate ist daher möglicherweise tiefer als die gemessene WER.
